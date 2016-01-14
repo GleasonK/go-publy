@@ -1,0 +1,25 @@
+{{define "head"}}
+	<title>New Link - Publy</title>
+{{end}}
+
+{{define "body"}}
+<div class="bs-docs-section clearfix">
+	<div class="row" style="text-align:center;">
+		<div class="col-lg-12">
+			<div class="page-header">
+				<h1>Create a Publy Link</h1>
+			</div>
+		</div>
+		<div id="url-box" class="col-md-8 col-md-offset-2">
+			<form class="form-horizontal" role="form" action="new" id="publy-form" method="post">
+				<div class="input-group">
+				   <input class="form-control" id="url" name="url" type="text" placeholder="Enter a URL to Shorten...">
+				   <span class="input-group-btn">
+				        <button id="submit-btn" class="btn btn-default" type="submit" form="publy-form"><span class="glyphicon glyphicon-menu-right"></span></button>
+				   </span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{{end}}

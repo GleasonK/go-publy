@@ -1,0 +1,247 @@
+{{define "head"}}
+	<title>Publy - Linkalytics</title>
+	<style type="text/css">
+	.card {
+		min-height:300px;
+		max-height: 450px;
+		height:100%;
+		margin-bottom: 25px;
+	}
+
+	.card .card-body{
+		height:70%;
+		overflow: auto;
+	}
+
+	.card .card-image {
+		height: 30%;
+	}
+
+	#info-card {
+		height:100px;
+	}
+	</style>
+{{end}}
+
+{{define "body"}}
+	{{$link := .Content.URL}}
+	<div class="bs-docs-section clearfix">
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="info-card" class="card">
+				    <div class="card-height-indicator"></div>
+				    <div class="card-content">
+				        <div class="card-image">
+				            <img src="/static/images/bg1.jpg" alt="Loading image...">
+				            <h3 class="card-image-headline">http://l.keving.xyz/l/{{.Content.Short}}</h3>
+				        </div>
+				        <div class="card-body">
+				            <h2>URL: {{.Content.URL}}</h2>
+					<h2>Share: <a href="http://l.keving.xyz/l/{{.Content.Short}}">http://l.keving.xyz/l/{{.Content.Short}}</a></h2>
+					<h2>Clicks: <span id="data-clicks">{{.Content.Data.Clicks}}</span></h2>
+				        </div>
+				    </div>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="text-align:center;margin-bottom:25px;">
+			<h1>Statistics</h1>
+		</div>
+		<div class="row">
+		<div class="col-md-6">
+				<div class="card">
+				    <div class="card-height-indicator"></div>
+				    <div class="card-content">
+				        <div class="card-image">
+				            <img src="/static/images/bg2.jpg" alt="Loading image...">
+				            <h3 class="card-image-headline">Languages</h3>
+				        </div>
+				        <div class="card-body">
+				            <table id="data-languages" class="table table-striped table-hover">
+								<thead><tr><th>Language</th><th>Count</th></tr></thead>
+				            	<tbody>
+								{{ range $k,$v := (byteToMap .Content.Data.Languages)}}
+									<tr><td>{{$k}}</td><td>{{$v}}</td></tr>
+								{{end}}
+								</tbody>
+				            </table>
+				        </div>
+				        <!--
+				        <footer class="card-footer">
+				            <button class="btn btn-flat">Share</button>
+				            <button class="btn btn-flat btn-warning">Learn More</button>
+				        </footer>
+				        -->
+				    </div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+				    <div class="card-height-indicator"></div>
+				    <div class="card-content">
+				        <div class="card-image">
+				            <img src="/static/images/bg3.jpg" alt="Loading image...">
+				            <h3 class="card-image-headline">Browsers</h3>
+				        </div>
+				        <div class="card-body">
+				            <table id="data-browsers" class="table table-striped table-hover">
+								<thead><tr><th>Browser</th><th>Count</th></tr></thead>
+				            	<tbody>
+								{{ range $k,$v := (byteToMap .Content.Data.Browsers)}}
+									<tr><td>{{$k}}</td><td>{{$v}}</td></tr>
+								{{end}}
+								</tbody>
+				            </table>
+				        </div>
+				    </div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+				    <div class="card-height-indicator"></div>
+				    <div class="card-content">
+				        <div class="card-image">
+				            <img src="/static/images/bg4.png" alt="Loading image...">
+				            <h3 class="card-image-headline">Referers</h3>
+				        </div>
+				        <div class="card-body">
+							<table id="data-referers" class="table table-striped table-hover">
+								<thead><tr><th>Referal</th><th>Count</th></tr></thead>
+				            	<tbody>
+								{{ range $k,$v := (byteToMap .Content.Data.Referers)}}
+									<tr><td>{{$k}}</td><td>{{$v}}</td></tr>
+								{{end}}
+								</tbody>
+				            </table>
+				        </div>
+				    </div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="card">
+				    <div class="card-height-indicator"></div>
+				    <div class="card-content">
+				        <div class="card-image">
+				            <img src="/static/images/bg5.png" alt="Loading image...">
+				            <h3 class="card-image-headline">Operating Systems</h3>
+				        </div>
+				        <div class="card-body">
+				            <table id="data-oss" class="table table-striped table-hover">
+				            	<thead><tr><th>OS</th><th>Count</th></tr></thead>
+				            	<tbody>
+								{{ range $k,$v := (byteToMap .Content.Data.OSs)}}
+									<tr><td>{{$k}}</td><td>{{$v}}</td></tr>
+								{{end}}
+								</tbody>
+				            </table>
+				        </div>
+				    </div>
+				</div>
+			</div>
+			<div class="col-lg-12">
+			{{if $link}}
+			<div class="card">
+			    <div class="card-height-indicator"></div>
+			    <div class="card-content">
+			        <div style="max-height:99px;" class="card-image">
+			            <img src="/static/images/bg5.png" alt="Loading image...">
+			            <h3 class="card-image-headline">Live ClickLog</h3>
+			        </div>
+			        <div class="card-body">
+						<div class="table-responsive">
+							<table id="clicklog" class="table table-striped table-hover">
+								<thead><tr><th>Click</th><th>Time</th><th>Language</th><th>Referer</th><th>Browser</th><th>OS</th><th>IP</th></tr></thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{else}} 
+				No Link 
+			{{end}}
+			</div>
+		</div>
+	</div>
+	{{if $link}}
+	<script src="http://cdn.pubnub.com/pubnub-3.7.18.min.js"></script>
+	<script type="text/javascript">
+		var clicks   = document.getElementById('data-clicks');
+		var languages= document.getElementById('data-languages');
+		var referers = document.getElementById('data-referers');
+		var browsers = document.getElementById('data-browsers');
+		var oss      = document.getElementById('data-oss');
+		var clicklog = document.getElementById('clicklog').getElementsByTagName('tbody')[0];
+
+		var pubnub = PUBNUB({
+		    subscribe_key: 'sub-c-30c17e1a-0007-11e5-a8ef-0619f8945a4f',
+		    publish_key: 'pub-c-7fad26fe-6c38-4940-b9c3-fbd19a9633af'
+		});
+
+		pubnub.subscribe({
+			channel: '{{.Content.Short}}',
+			message: function(m){
+				var pm = JSON.parse(atob(m));
+				console.log(pm);
+				var data  = pm.data;
+				var refs  = JSON.parse(atob(data.referers));  console.log(refs);
+				var langs = JSON.parse(atob(data.languages)); console.log(langs);
+				var brows = JSON.parse(atob(data.browsers));  console.log(brows);
+				var os    = JSON.parse(atob(data.oss)); 	  console.log(oss);
+				var click = pm.click;
+				clicks.innerHTML = data.clicks;
+				updateClickLog(data,click);
+				updateTable(languages, langs);
+				updateTable(browsers,  brows);
+				updateTable(referers,  refs);
+				updateTable(oss,       os);
+
+			},
+			error: function (error) {
+				console.log(JSON.stringify(error));
+			}
+		});
+
+		function updateClickLog(data, click){
+			var row = clicklog.insertRow(0);
+			var clickcell = row.insertCell(0);
+			var timecell  = row.insertCell(1);
+			var langcell  = row.insertCell(2);
+			var refcell   = row.insertCell(3);
+			var browcell  = row.insertCell(4);
+			var oscell    = row.insertCell(5);
+			var ipcell    = row.insertCell(6);
+			clickcell.innerHTML = data.clicks;
+			timecell.innerHTML  = new Date().toLocaleTimeString(); 
+			langcell.innerHTML  = click.language;
+			refcell.innerHTML   = click.referer;
+			browcell.innerHTML  = click.browser;
+			oscell.innerHTML    = click.os;
+			ipcell.innerHTML    = click.ip;
+		}
+
+		function updateTable(tbl, vals){
+			var oldTbody = tbl.getElementsByTagName('tbody')[0];
+			var newTbody = document.createElement('tbody');
+			valArr = [];
+			for (var key in vals) {
+			  if (vals.hasOwnProperty(key)) {
+			    valArr.push({key:key,val:vals[key]});
+			  }
+			}
+			valArr.sort(function(a,b){return (a.key > b.key) ? 1 : ((b.key > a.key) ? -1 : 0);});
+			console.log(valArr);
+			for (var i=0; i<valArr.length;i++){
+				var datum = valArr[i];
+				var row = newTbody.insertRow(0);
+				var keycell = row.insertCell(0);
+				var valcell = row.insertCell(1);
+				keycell.innerHTML = datum.key;
+				valcell.innerHTML = datum.val;
+			}
+			tbl.replaceChild(newTbody, oldTbody);
+		}
+	</script>
+	{{end}}
+{{end}}

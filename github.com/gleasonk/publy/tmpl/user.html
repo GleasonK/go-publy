@@ -1,0 +1,17 @@
+{{define "head"}}
+	<title>Publy User - {{.Pubber.First}}</title>
+{{end}}
+
+{{define "body"}}
+	<h1>Welcome Back {{ .Pubber.Username }}!</h1>
+	<ul>
+		<li>Username: {{ .Pubber.Username }}</li>
+		<li>Email: {{ .Pubber.Email }}</li>
+	</ul>
+	<h2>My Links</h2>
+	<ul>
+	{{range $link := .Pubber.Links}}
+		<li><a href="/link/{{$link.Short}}">{{$link.URL}}</a></li>
+	{{end}}
+	</ul>
+{{end}}
